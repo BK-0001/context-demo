@@ -1,0 +1,8 @@
+{
+  "categories": [
+    { "id": 1, "title": "all tasks" },
+    { "id": 2, "title": "work" },
+    { "id": 3, "title": "study" },
+    { "id": 4, "title": "movies" }
+  ]
+}

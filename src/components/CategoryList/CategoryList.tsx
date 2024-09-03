@@ -1,27 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type CategoryType = {
   id: number;
   title: string;
 };
 
-const CATEGORIES: CategoryType[] = [
-  { id: 1, title: "all tasks" },
-  { id: 2, title: "work" },
-  { id: 3, title: "study" },
-  { id: 4, title: "movies" }
-];
-
 export function CategoryList() {
-  const [categories, setCategories] = useState<CategoryType[]>(CATEGORIES);
+  const [categories, setCategories] = useState<CategoryType[]>([]);
 
+  useEffect(() => {
+    const getCategories = async () => {
+      const response = await fetch("http://localhost:3005/categories");
+      const data: CategoryType[] = await response.json();
+
+      setCategories(data);
+    };
+
+    getCategories();
+  }, []);
+
+  console.log("render");
   return (
-    <ul>
-      {categories.map((category) => (
-        <li key={category.id}>
-          <a href="">{category.title}</a>
-        </li>
-      ))}
-    </ul>
+    <>
+      <ul>
+        {categories.map((category) => (
+          <li key={category.id}>
+            <a href="">{category.title}</a>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }
