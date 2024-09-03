@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { CategoryForm } from "../CategoryForm";
 import { CategoryList } from "../CategoryList";
+import NewCategory from "../NewCategory/NewCategory";
 import "./Navbar.scss";
 
 const BASE_CLASS = "navbar";
@@ -69,7 +69,7 @@ export function Navbar({ className }: Props) {
         <CategoryList categories={categories} />
       </nav>
 
-      <CategoryForm
+      <NewCategory
         categoryTitle={categoryTitle}
         isFormVisible={isFormVisible}
         onChange={handleTitleChange}

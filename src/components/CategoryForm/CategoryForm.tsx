@@ -1,33 +1,19 @@
-import { ChangeEvent, FormEvent, MouseEvent } from "react";
+import { ChangeEvent, FormEvent } from "react";
 
+import { Button } from "../core/Button/Button";
+import { Input } from "../core/Input/Input";
 import "./CategoryForm.scss";
 
 type Props = {
-  isFormVisible: boolean;
   categoryTitle: string;
-  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
-export function CategoryForm({
-  isFormVisible,
-  categoryTitle,
-  onChange,
-  onClick,
-  onSubmit
-}: Props) {
+export function CategoryForm({ categoryTitle, onChange, onSubmit }: Props) {
   return (
-    <>
-      <button onClick={onClick}>
-        {isFormVisible ? "Hide" : "New Category"}
-      </button>
-
-      {isFormVisible && (
-        <form onSubmit={onSubmit} action="">
-          <input type="text" value={categoryTitle} onChange={onChange} />
-          <button>Add</button>
-        </form>
-      )}
-    </>
+    <form onSubmit={onSubmit}>
+      <Input type="text" value={categoryTitle} onChange={onChange} />
+      <Button>Add</Button>
+    </form>
   );
 }
