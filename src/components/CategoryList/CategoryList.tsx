@@ -1,34 +1,17 @@
-import { useEffect, useState } from "react";
+import { CategoryType } from "../Navbar/Navbar";
 
-type CategoryType = {
-  id: number;
-  title: string;
+type Props = {
+  categories: CategoryType[];
 };
 
-export function CategoryList() {
-  const [categories, setCategories] = useState<CategoryType[]>([]);
-
-  useEffect(() => {
-    const getCategories = async () => {
-      const response = await fetch("http://localhost:3005/categories");
-      const data: CategoryType[] = await response.json();
-
-      setCategories(data);
-    };
-
-    getCategories();
-  }, []);
-
-  console.log("render");
+export function CategoryList({ categories }: Props) {
   return (
-    <>
-      <ul>
-        {categories.map((category) => (
-          <li key={category.id}>
-            <a href="">{category.title}</a>
-          </li>
-        ))}
-      </ul>
-    </>
+    <ul>
+      {categories.map((category) => (
+        <li key={category.id}>
+          <a href="">{category.title}</a>
+        </li>
+      ))}
+    </ul>
   );
 }
