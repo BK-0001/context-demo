@@ -19,7 +19,7 @@ export function Navbar({ className }: Props) {
   const classes = [BASE_CLASS, className].join(" ");
   const [categoryTitle, setCategoryTitle] = useState<string>("");
   const [isFormVisible, setIsFormVisible] = useState<boolean>(false);
-  const { addCategory } = useCategories();
+  const { add } = useCategories();
 
   const handleClick = () => {
     setIsFormVisible((previousState) => !previousState);
@@ -28,7 +28,7 @@ export function Navbar({ className }: Props) {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    addCategory({ title: categoryTitle });
+    add({ title: categoryTitle });
 
     setCategoryTitle("");
     setIsFormVisible(false);

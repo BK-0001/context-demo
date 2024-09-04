@@ -9,17 +9,17 @@ import { CategoryType } from "../components/Navbar/Navbar";
 
 type CategoryContextType = {
   categories: CategoryType[];
-  addCategory: (newCategory: Omit<CategoryType, "id">) => void;
-  editCategory: () => void;
-  deleteCategory: () => void;
+  add: (newCategory: Omit<CategoryType, "id">) => void;
+  edit: (id: CategoryType["id"], newTitle: CategoryType["title"]) => void;
+  remove: (id: CategoryType["id"]) => void;
 };
 
 // step 1. create context
 const CategoryContext = createContext<CategoryContextType>({
   categories: [],
-  addCategory: () => {},
-  editCategory: () => {},
-  deleteCategory: () => {}
+  add: () => {},
+  edit: () => {},
+  remove: () => {}
 });
 
 type Props = {
@@ -41,7 +41,7 @@ export function CategoryContextProvider({ children }: Props) {
     getCategories();
   }, []);
 
-  const addCategory = async (newCategory: Omit<CategoryType, "id">) => {
+  const add = async (newCategory: Omit<CategoryType, "id">) => {
     const response = await fetch("http://localhost:3005/categories", {
       method: "POST",
       body: JSON.stringify(newCategory),
@@ -57,11 +57,45 @@ export function CategoryContextProvider({ children }: Props) {
     setCategories((previousState) => [...previousState, data]);
   };
 
+  const edit = async (
+    id: CategoryType["id"],
+    newTitle: CategoryType["title"]
+  ) => {
+    const response = await fetch(`http://localhost:3005/categories/${id}`, {
+      method: "PUT",
+      body: JSON.stringify({ title: newTitle })
+    });
+
+    const updated = await response.json();
+
+    // update state
+    setCategories((prevState) => {
+      const copies = [...prevState];
+
+      const index = copies.findIndex((copy) => copy.id === updated.id);
+      copies[index].title = updated.title;
+
+      return copies;
+    });
+  };
+
+  const remove = async (id: CategoryType["id"]) => {
+    // send request to the server to delete the category
+    const response = await fetch(`http://localhost:3005/categories/${id}`, {
+      method: "DELETE"
+    });
+
+    await response.json();
+
+    // when everything is successful, remove the delete item from the categories state
+    setCategories((prev) => prev.filter((category) => category.id !== id));
+  };
+
   const value = {
     categories,
-    addCategory,
-    editCategory: () => {},
-    deleteCategory: () => {}
+    add,
+    edit,
+    remove
   };
 
   return (

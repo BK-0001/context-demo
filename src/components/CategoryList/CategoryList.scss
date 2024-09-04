@@ -2,10 +2,34 @@ $class: category-list;
 
 .#{$class} {
   display: grid;
-  gap: 0.5rem;
+  gap: 0.125rem;
   margin-bottom: 1rem;
+
+  &__form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    input {
+      flex: 1;
+    }
+  }
 
   &__item {
     text-transform: capitalize;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    min-width: 200px;
+
+    &:hover {
+      background-color: rgb(241, 241, 241);
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.25rem;
   }
 }

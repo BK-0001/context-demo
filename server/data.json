@@ -1,84 +1,12 @@
 {
   "categories": [
     {
-      "id": "1",
-      "title": "all tasks"
+      "title": "Study",
+      "id": "8ea5"
     },
     {
-      "id": "2",
-      "title": "work"
-    },
-    {
-      "id": "3",
-      "title": "study"
-    },
-    {
-      "id": "4",
-      "title": "movies"
-    },
-    {
-      "id": "ee99",
-      "title": "Home"
-    },
-    {
-      "id": "e678",
-      "title": "Grocery"
-    },
-    {
-      "id": "0363",
-      "title": "Grocery"
-    },
-    {
-      "id": "fe96",
-      "title": "asdfasdfasdf"
-    },
-    {
-      "id": "8204",
-      "title": "asdfasdf"
-    },
-    {
-      "id": "9879",
-      "title": "asdfasdfad"
-    },
-    {
-      "id": "ed43",
-      "title": "fff"
-    },
-    {
-      "id": "4389",
-      "title": "adsfasdf"
-    },
-    {
-      "id": "d734",
-      "title": "adfadsf"
-    },
-    {
-      "id": "eef9",
-      "title": "asdfasdf"
-    },
-    {
-      "id": "72bd",
-      "title": "asdfasdf"
-    },
-    {
-      "id": "8e2d",
-      "title": "asdfadsfasdfadsf"
-    },
-    {
-      "id": "ba1b",
-      "title": "a"
-    },
-    {
-      "id": "e4f0",
-      "title": "d"
-    },
-    {
-      "id": "551b",
-      "title": "f"
-    },
-    {
-      "id": "ad6c",
-      "title": "d"
+      "id": "0a8b",
+      "title": "All Tasks"
     }
   ]
 }
