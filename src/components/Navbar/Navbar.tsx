@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from "react";
+import { useCategories } from "../../contexts/category-context";
 import { CategoryList } from "../CategoryList";
 import NewCategory from "../NewCategory/NewCategory";
 import "./Navbar.scss";
@@ -18,32 +19,17 @@ export function Navbar({ className }: Props) {
   const classes = [BASE_CLASS, className].join(" ");
   const [categoryTitle, setCategoryTitle] = useState<string>("");
   const [isFormVisible, setIsFormVisible] = useState<boolean>(false);
+  const { addCategory } = useCategories();
 
   const handleClick = () => {
-    // prev => false => true
-    // prev => true => false
     setIsFormVisible((previousState) => !previousState);
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // sending the new data to the server to store the data
-    const response = await fetch("http://localhost:3005/categories", {
-      method: "POST",
-      body: JSON.stringify({ title: categoryTitle }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
+    addCategory({ title: categoryTitle });
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const data = await response.json();
-
-    // manage state
-    // setCategories((previousState) => [...previousState, data]);
-
-    // reset the title state
     setCategoryTitle("");
     setIsFormVisible(false);
   };

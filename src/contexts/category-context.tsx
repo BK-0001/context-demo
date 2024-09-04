@@ -9,7 +9,7 @@ import { CategoryType } from "../components/Navbar/Navbar";
 
 type CategoryContextType = {
   categories: CategoryType[];
-  addCategory: () => void;
+  addCategory: (newCategory: Omit<CategoryType, "id">) => void;
   editCategory: () => void;
   deleteCategory: () => void;
 };
@@ -41,9 +41,25 @@ export function CategoryContextProvider({ children }: Props) {
     getCategories();
   }, []);
 
+  const addCategory = async (newCategory: Omit<CategoryType, "id">) => {
+    const response = await fetch("http://localhost:3005/categories", {
+      method: "POST",
+      body: JSON.stringify(newCategory),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const data = await response.json();
+
+    // manage state
+    setCategories((previousState) => [...previousState, data]);
+  };
+
   const value = {
     categories,
-    addCategory: () => {},
+    addCategory,
     editCategory: () => {},
     deleteCategory: () => {}
   };
