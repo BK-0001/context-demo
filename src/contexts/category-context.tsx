@@ -12,6 +12,7 @@ type CategoryContextType = {
   add: (newCategory: Omit<CategoryType, "id">) => void;
   edit: (id: CategoryType["id"], newTitle: CategoryType["title"]) => void;
   remove: (id: CategoryType["id"]) => void;
+  reorder: (categories: CategoryType[]) => void;
 };
 
 // step 1. create context
@@ -19,7 +20,8 @@ const CategoryContext = createContext<CategoryContextType>({
   categories: [],
   add: () => {},
   edit: () => {},
-  remove: () => {}
+  remove: () => {},
+  reorder: () => {}
 });
 
 type Props = {
@@ -91,11 +93,15 @@ export function CategoryContextProvider({ children }: Props) {
     setCategories((prev) => prev.filter((category) => category.id !== id));
   };
 
+  const reorder = (categories: CategoryType[]) => {
+    setCategories(categories);
+  };
   const value = {
     categories,
     add,
     edit,
-    remove
+    remove,
+    reorder
   };
 
   return (

@@ -1,12 +1,16 @@
 {
   "categories": [
     {
-      "title": "Study",
+      "title": "All Tasks",
       "id": "8ea5"
     },
     {
       "id": "0a8b",
       "title": "All Tasks"
+    },
+    {
+      "id": "6a03",
+      "title": "Study"
     }
   ]
 }

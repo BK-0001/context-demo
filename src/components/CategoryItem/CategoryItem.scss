@@ -1,0 +1,29 @@
+$class: category-item;
+
+.#{$class} {
+  text-transform: capitalize;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  min-width: 200px;
+
+  &:hover {
+    background-color: rgb(241, 241, 241);
+  }
+
+  &__form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    input {
+      flex: 1;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.25rem;
+  }
+}
