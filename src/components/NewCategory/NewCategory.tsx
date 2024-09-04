@@ -10,6 +10,8 @@ type Props = {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
+const BASE_CLASS = "new-category";
+
 export default function NewCategory({
   isFormVisible,
   categoryTitle,
@@ -18,9 +20,9 @@ export default function NewCategory({
   onSubmit
 }: Props) {
   return (
-    <>
+    <div className={BASE_CLASS}>
       <Button onClick={onClick}>
-        {isFormVisible ? "Hide" : "New Category"}
+        {isFormVisible ? "Hide" : "+ New Category"}
       </Button>
 
       {isFormVisible && (
@@ -30,6 +32,6 @@ export default function NewCategory({
           onSubmit={onSubmit}
         />
       )}
-    </>
+    </div>
   );
 }

@@ -1,5 +1,7 @@
 import { ButtonHTMLAttributes } from "react";
 
+import "./Button.scss";
+
 const BASE_CLASS = "button";
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement>;

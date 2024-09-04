@@ -1,4 +1,11 @@
 $class: category-list;
 
 .#{$class} {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+
+  &__item {
+    text-transform: capitalize;
+  }
 }
