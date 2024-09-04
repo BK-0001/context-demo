@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { CategoryList } from "../CategoryList";
 import NewCategory from "../NewCategory/NewCategory";
 import "./Navbar.scss";
@@ -17,7 +17,6 @@ export type CategoryType = {
 export function Navbar({ className }: Props) {
   const classes = [BASE_CLASS, className].join(" ");
   const [categoryTitle, setCategoryTitle] = useState<string>("");
-  const [categories, setCategories] = useState<CategoryType[]>([]);
   const [isFormVisible, setIsFormVisible] = useState<boolean>(false);
 
   const handleClick = () => {
@@ -25,17 +24,6 @@ export function Navbar({ className }: Props) {
     // prev => true => false
     setIsFormVisible((previousState) => !previousState);
   };
-
-  useEffect(() => {
-    const getCategories = async () => {
-      const response = await fetch("http://localhost:3005/categories");
-      const data: CategoryType[] = await response.json();
-
-      setCategories(data);
-    };
-
-    getCategories();
-  }, []);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -49,10 +37,11 @@ export function Navbar({ className }: Props) {
       }
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const data = await response.json();
 
     // manage state
-    setCategories((previousState) => [...previousState, data]);
+    // setCategories((previousState) => [...previousState, data]);
 
     // reset the title state
     setCategoryTitle("");
@@ -66,7 +55,7 @@ export function Navbar({ className }: Props) {
   return (
     <div className={classes}>
       <nav>
-        <CategoryList categories={categories} />
+        <CategoryList />
       </nav>
 
       <NewCategory

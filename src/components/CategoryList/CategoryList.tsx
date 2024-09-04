@@ -1,10 +1,8 @@
-import { CategoryType } from "../Navbar/Navbar";
+import { useCategories } from "../../contexts/category-context";
 
-type Props = {
-  categories: CategoryType[];
-};
+export function CategoryList() {
+  const { categories } = useCategories();
 
-export function CategoryList({ categories }: Props) {
   return (
     <ul>
       {categories.map((category) => (
