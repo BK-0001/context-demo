@@ -16,9 +16,7 @@ export function CategoryList() {
       onReorder={reorder}
     >
       {categories.map((category) => (
-        <Reorder.Item key={category.id} value={category}>
-          <CategoryItem category={category} />
-        </Reorder.Item>
+        <CategoryItem key={category.id} category={category} />
       ))}
     </Reorder.Group>
   );

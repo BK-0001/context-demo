@@ -1,3 +1,4 @@
+import { Reorder } from "framer-motion";
 import { FormEvent, useState } from "react";
 import { useCategories } from "../../contexts/CategoryContext/CategoryContext";
 import { CategoryType } from "../Navbar/Navbar";
@@ -30,7 +31,7 @@ export function CategoryItem({ category }: Props) {
     }
   };
   return (
-    <li className={BASE_CLASS}>
+    <Reorder.Item className={BASE_CLASS} value={category}>
       {isEditing ? (
         <form
           onSubmit={(event) => handleSubmit(event, category.id)}
@@ -59,6 +60,6 @@ export function CategoryItem({ category }: Props) {
           </div>
         </>
       )}
-    </li>
+    </Reorder.Item>
   );
 }
