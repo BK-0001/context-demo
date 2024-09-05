@@ -6,6 +6,7 @@ import {
   useReducer
 } from "react";
 import { CategoryType } from "../../components/Navbar/Navbar";
+import { fetchRequest } from "../../lib/api/api";
 import { addCategory } from "./CategoryActions";
 import { categoryReducer, CategoryReducer } from "./CategoryReducer";
 
@@ -51,19 +52,14 @@ export function CategoryContextProvider({ children }: Props) {
   }, []);
 
   const add = async (newCategory: Omit<CategoryType, "id">) => {
-    const response = await fetch("http://localhost:3005/categories", {
-      method: "POST",
-      body: JSON.stringify(newCategory),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const data: CategoryType = await response.json();
+    const category = await fetchRequest<CategoryType, Omit<CategoryType, "id">>(
+      "/categories",
+      "POST",
+      newCategory
+    );
 
     // manage state
-    dispatch(addCategory(data));
+    dispatch(addCategory(category));
   };
 
   const edit = async (
