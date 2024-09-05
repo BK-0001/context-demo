@@ -1,7 +1,7 @@
 import { Navbar } from "./components/Navbar";
 
 import "./App.scss";
-import { CategoryContextProvider } from "./contexts/category-context";
+import { CategoryContextProvider } from "./contexts/CategoryContext/CategoryContext";
 
 const BASE_CLASS = "app";
 

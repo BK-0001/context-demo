@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { useCategories } from "../../contexts/category-context";
+import { useCategories } from "../../contexts/CategoryContext/CategoryContext";
 import { CategoryList } from "../CategoryList";
 import NewCategory from "../NewCategory/NewCategory";
 import "./Navbar.scss";

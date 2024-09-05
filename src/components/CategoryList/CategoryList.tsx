@@ -1,5 +1,5 @@
 import { Reorder } from "framer-motion";
-import { useCategories } from "../../contexts/category-context";
+import { useCategories } from "../../contexts/CategoryContext/CategoryContext";
 import { CategoryItem } from "../CategoryItem";
 
 import "./CategoryList.scss";

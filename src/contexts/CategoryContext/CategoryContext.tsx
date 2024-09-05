@@ -3,9 +3,10 @@ import {
   ReactNode,
   useContext,
   useEffect,
-  useState
+  useReducer
 } from "react";
-import { CategoryType } from "../components/Navbar/Navbar";
+import { CategoryType } from "../../components/Navbar/Navbar";
+import { categoryReducer, CategoryReducer } from "./CategoryReducer";
 
 type CategoryContextType = {
   categories: CategoryType[];
@@ -30,14 +31,19 @@ type Props = {
 
 // step2. create provider
 export function CategoryContextProvider({ children }: Props) {
-  const [categories, setCategories] = useState<CategoryType[]>([]);
+  // useReducer
+  const [categories2, dispatch] = useReducer<CategoryReducer>(
+    categoryReducer,
+    []
+  );
 
   useEffect(() => {
     const getCategories = async () => {
       const response = await fetch("http://localhost:3005/categories");
       const data: CategoryType[] = await response.json();
 
-      setCategories(data);
+      // to update state, call dispatch to pass the action and useReducer will be calling the reducer
+      dispatch({ type: "INIT", payload: { categories: data } });
     };
 
     getCategories();
@@ -53,10 +59,10 @@ export function CategoryContextProvider({ children }: Props) {
     });
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const data = await response.json();
+    const data: CategoryType = await response.json();
 
     // manage state
-    setCategories((previousState) => [...previousState, data]);
+    dispatch({ type: "ADD", payload: { category: data } });
   };
 
   const edit = async (
@@ -70,15 +76,7 @@ export function CategoryContextProvider({ children }: Props) {
 
     const updated = await response.json();
 
-    // update state
-    setCategories((prevState) => {
-      const copies = [...prevState];
-
-      const index = copies.findIndex((copy) => copy.id === updated.id);
-      copies[index].title = updated.title;
-
-      return copies;
-    });
+    dispatch({ type: "EDIT", payload: { category: updated } });
   };
 
   const remove = async (id: CategoryType["id"]) => {
@@ -90,14 +88,14 @@ export function CategoryContextProvider({ children }: Props) {
     await response.json();
 
     // when everything is successful, remove the delete item from the categories state
-    setCategories((prev) => prev.filter((category) => category.id !== id));
+    dispatch({ type: "DELETE", payload: { categoryId: id } });
   };
 
   const reorder = (categories: CategoryType[]) => {
-    setCategories(categories);
+    dispatch({ type: "REORDER", payload: { categories } });
   };
   const value = {
-    categories,
+    categories: categories2,
     add,
     edit,
     remove,
