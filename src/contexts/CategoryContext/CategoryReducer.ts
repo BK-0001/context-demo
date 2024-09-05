@@ -1,15 +1,6 @@
 import { Reducer } from "react";
 import { CategoryType } from "../../components/Navbar/Navbar";
-
-type CategoryAction =
-  | {
-      type: "INIT";
-      payload: { categories: CategoryType[] };
-    }
-  | { type: "ADD"; payload: { category: CategoryType } }
-  | { type: "EDIT"; payload: { category: CategoryType } }
-  | { type: "DELETE"; payload: { categoryId: CategoryType["id"] } }
-  | { type: "REORDER"; payload: { categories: CategoryType[] } };
+import { CategoryAction } from "./CategoryActions";
 
 export type CategoryReducer = Reducer<CategoryType[], CategoryAction>;
 

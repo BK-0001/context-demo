@@ -6,6 +6,7 @@ import {
   useReducer
 } from "react";
 import { CategoryType } from "../../components/Navbar/Navbar";
+import { addCategory } from "./CategoryActions";
 import { categoryReducer, CategoryReducer } from "./CategoryReducer";
 
 type CategoryContextType = {
@@ -62,7 +63,7 @@ export function CategoryContextProvider({ children }: Props) {
     const data: CategoryType = await response.json();
 
     // manage state
-    dispatch({ type: "ADD", payload: { category: data } });
+    dispatch(addCategory(data));
   };
 
   const edit = async (
